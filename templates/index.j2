@@ -1,0 +1,120 @@
+
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Reports</title>
+  <Link rel="stylesheet" href="static/css/reports_style.css" type="text/css">
+ </head>
+ <body>
+
+    <!-------- Nav bar -------->
+    <div id="nav_bar">
+      <ul id="nav_bar_list">
+        <li id="nav_bar_elem"><a href={{reports_data[0][0]}}>Reports</a></li>
+        <li id="nav_bar_elem"><a href={{reports_data[0][1]}}>Customers</a></li>
+        <li id="nav_bar_elem"><a href={{reports_data[0][2]}}>Orders</a></li>
+        <li id="nav_bar_elem"><a href={{reports_data[0][3]}}>Products</a></li>
+        <li id="nav_bar_elem"><a href={{reports_data[0][4]}}>Departments</a></li>
+        <li id="nav_bar_elem"><a href={{reports_data[0][5]}}>Seasons</a></li>
+      </ul>
+    </div>
+
+    <!-------- Title -------->
+    <div id="title">
+        <h2>Cart-ashian's Produce</h2>
+    </div>
+
+
+    <!--Container div-->
+    <div class="container_div">
+        <div class="table_div">
+
+            <!--Table (OrderProduct) for running log of purchases (Left div) -->
+            <span class="table_title">Sales log</span>
+            <table id = "order_table">
+
+                <!--Table header-->
+                <tr>
+                    <th>productID</th>
+                    <th>orderID</th>
+                    <th>seasonID</th>
+                    <th>quantitySold</th>
+                    <th>productTotal</th>
+                    <th>Modify</th>
+                </tr>
+
+                <!--Table data-->
+                {% for row in reports_data[1] %}
+                <tr>
+                    <td>{{row['productID']}}</td>
+                    <td>{{row['orderID']}}</td>
+                    <td>{{row['seasonID']}}</td>
+                    <td>{{row['quantitySold']}}</td>
+                    <td>{{row['productTotal']}}</td>
+                    <td><button class="cancelItem" id={{row['orderID']}}>Cancel</button></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+
+
+
+        <!--For data display (Right div) -->
+        <div class="dataDisplay_div">
+            <span class="table_title">Data Report</span>
+
+            <!--Row 1: Current season (Summer 2021) --->
+            <div class="mini_div_container_row2">
+                <p class="sub_title"><i>Current season (Summer 2021)</i></p>
+                <table>
+                    <tr>
+                        <td>Produce</td>
+                        <td>Quantity</td>
+                        <td>Total ($)</td>
+                        <td>% of Total</td>
+                    </tr>
+
+                    {% for row in reports_data[2] %}
+                    <tr>
+                        <th>{{row['Product']}}</td>
+                        <td>{{row['Quantity']}}</td>
+                        <td>{{row['Total']}}</td>
+                        <td>{{row['Percent']}}</td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+
+            <!--Row 2: Current year top sellers (2021)-->
+            <div class="mini_div_row1_left">
+                <p class="sub_title"><i>Current year top sellers (2021)</i></p>
+                <table>
+                    <tr>
+                        <td>Season</td>
+                        <td>Produce</td>
+                        <td>Units Sold</td>
+                        <td>Total ($)</td>
+                    </tr>
+
+                    {% for row in reports_data[3] %}
+                    <tr>
+                        <th>{{row['season']}}</th>
+                        <td>{{row['product']}}</td>
+                        <td>{{row['quantity']}}</td>
+                        <td>{{row['total']}}</td>
+                    </tr>
+                    {% endfor %}
+
+
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="static/js/reports_script.js"></script>
+ </body>
+</html>
