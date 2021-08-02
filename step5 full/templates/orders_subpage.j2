@@ -1,0 +1,96 @@
+
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Orders</title>
+  <Link rel="stylesheet" href="static/css/orders_style.css" type="text/css">
+ </head>
+ <body>
+
+    <!-------- Nav bar -------->
+    <div id="nav_bar">
+      <ul id="nav_bar_list">
+        <li id="nav_bar_elem"><a href={{order_data[0][0]}}>Reports</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][1]}}>Customers</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][2]}}>Orders</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][3]}}>Products</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][4]}}>Departments</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][5]}}>Seasons</a></li>
+      </ul>
+    </div>
+
+    <!-------- Title -------->
+    <div id="title">
+        <h2>Orders</h2>
+    </div>
+
+    <div class="order_table">
+      <table class="orders">
+
+        <!-- Table Header -->
+        <tr>
+          <th>orderID</th>
+          <th>customerID</th>
+          <th>seasonID</th>
+          <th>totalCost</th>
+        </tr>
+
+        <!-- Sample Data -->
+        {% for row in order_data[1] %}
+        <tr>
+          <td>{{row['orderID']}}</td>
+          <td>{{row['customerID']}}</td>
+          <td>{{row['seasonID']}}</td>
+          <td>{{row['totalCost']}}</td>
+        </tr>
+        {% endfor %}
+
+      </table>
+    </div>
+
+    <div class="demo_div">
+
+        <!--Sub page title-->
+        <h2>Demo UI - Make an order</h2>
+
+        <!---------- Form ---------->
+
+          <!--Specify customer-->
+          <label for="customer">Select Customer:</label>
+          <select name="customer" id="customer">
+            {% for row in order_data[2] %}
+                <option value={{row[0]}}>{{row[1]}}</option>
+            {% endfor %}
+
+          </select>
+          <br><br>
+
+          <!--Add items to cart-->
+        <table class="product_table">
+            Select produce
+            <tr>
+                <th>Name</td>
+                <th>Price ($)</td>
+                <th>Unit</td>
+                <th>Quantity</td>
+            </tr>
+
+            {% for row in order_data[3] %}
+            <tr>
+                <td>{{row['productName']}}</td>
+                <td>{{row['salePrice']}}</td>
+                <td>{{row['unitType']}}</td>
+                <td><input class="product_quantity" id={{row['productID']}} value="0"></input></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+          <br><br>
+          <input id="place_order_button" type="submit" value="Place Order">
+
+    </div>
+
+    <script src="static/js/orders_script.js"></script>
+ </body>
+</html>

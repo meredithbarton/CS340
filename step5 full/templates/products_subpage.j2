@@ -1,0 +1,97 @@
+
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Products</title>
+  <Link rel="stylesheet" href="static/css/products_style.css" type="text/css">
+ </head>
+ <body>
+
+    <!-------- Nav bar -------->
+    <div id="nav_bar">
+      <ul id="nav_bar_list">
+        <li id="nav_bar_elem"><a href={{product_data[0][0]}}>Reports</a></li>
+        <li id="nav_bar_elem"><a href={{product_data[0][1]}}>Customers</a></li>
+        <li id="nav_bar_elem"><a href={{product_data[0][2]}}>Orders</a></li>
+        <li id="nav_bar_elem"><a href={{product_data[0][3]}}>Products</a></li>
+        <li id="nav_bar_elem"><a href={{product_data[0][4]}}>Departments</a></li>
+        <li id="nav_bar_elem"><a href={{product_data[0][5]}}>Seasons</a></li>
+      </ul>
+    </div>
+
+    <!-------- Title -------->
+    <div id="title">
+        <h2>Products</h2>
+    </div>
+
+
+    <!--Table (Products) -->
+    <div class="product_table">
+
+        <table>
+            <!-- Table Header -->
+            <tr>
+                <th>productID</th>
+                <th>productName</th>
+                <th>departmentID</th>
+                <th>salePrice</th>
+                <th>unitType</th>
+                <th>Modify</th>
+            </tr>
+
+            <!-- Sample Data -->
+            {% for row in product_data[1] %}
+            <tr class="product_row" id={{row['productID']}}>
+                <td>{{row['productID']}}</td>
+                <td>{{row['productName']}}</td>
+                <td>{{row['departmentID']}}</td>
+                <td>{{row['salePrice']}}</td>
+                <td>{{row['unitType']}}</td>
+                <td><button class="update_button" id={{row['productID']}}>Update</button><button class="delete_button" id={{row['productID']}}>Delete</button></td>
+            </tr>
+            {% endfor %}
+
+            <!-- Input Box-->
+            <tr id="input_row">
+                <td></td>
+                <td><input id="new_name" type="text" placeholder="Name"></input></td>
+                <td><input id="new_department" type="text" placeholder="Department ID"></input></td>
+                <td> <input id="new_price" type="text" placeholder="Sale Price"></input></td>
+                <td> <input id="new_unit" type="text" placeholder="Unit Type"></input></td>
+                <td><button id="insert_product">Add Product</button> </td>
+            </tr>
+
+            <!-- Search Box-->
+            <tr id="input_row">
+                <td colspan="2">Search by ID, Name or Price:</td>
+                <td><input id='searchByID' placeholder='Product ID'></input></td>
+                <td><input id='searchByName' placeholder='Product Name'</input></td>
+                <td><input id='searchByPrice' placeholder='Max Price (i.e. 5.27)'</input></td>
+                <td><button id="search_button">Search</button></td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div id="search_div">
+        <table id="searchResultTable">
+            <tr>
+                <td colspan="5">Search Results</td>
+            </tr>
+
+            <!-- Table Header -->
+            <tr id="searchTableHeaders">
+                <th>productID</th>
+                <th>productName</th>
+                <th>departmentID</th>
+                <th>salePrice</th>
+                <th>unitType</th>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <script src="static/js/products_script.js"></script> 
+ </body>
+</html>
